@@ -15,7 +15,11 @@ const jwt = {
         } catch (err) {
             return false;
         }
+    },
+    decodeAccessToken: (token) => {
+        return JsonWebToken.decode(token)
     }
 };
 
 module.exports = jwt;
+
