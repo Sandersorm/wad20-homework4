@@ -7,27 +7,27 @@
 
         </div>
         <div class="main-container">
-            <div class="post" v-for="post in posts" :key="post.id">
+          <div class="post" v-for="post in posts" :key="post.id">
                 <span class="post-author">
                     <span class="post-author-info">
                         <img :src="post.author.avatar" :alt="post.author | profileName"/>
                         <small>{{post.author | profileName}}</small>
                     </span>
-                    <small>{{post.createTime | formatDate}}</small>
+                    <small class="time-content">{{post.createTime | formatDate}}</small>
                 </span>
-                <div class="post-image" v-if="post.media">
-                    <img :src="post.media.url" :alt="post.text" v-if="post.media.type === 'image'">
-                    <video controls="" v-if="post.media.type === 'video'">
-                        <source type="video/mp4" :src="post.media.url">
-                    </video>
-                </div>
-                <div class="post-title">
-                    <h3>{{post.text}}</h3>
-                </div>
-                <div class="post-actions">
-                    <LikeButton :post="post"/>
-                </div>
+            <div class="post-image" v-if="post.media">
+              <img class="image-content" :src="post.media.url" :alt="post.text" v-if="post.media.type === 'image'">
+              <video class="video-content" controls="" v-if="post.media.type === 'video'">
+                <source type="video/mp4" :src="post.media.url">
+              </video>
             </div>
+            <div class="post-title">
+              <h3>{{post.text}}</h3>
+            </div>
+            <div class="post-actions">
+              <LikeButton :post="post"/>
+            </div>
+          </div>
 
         </div>
     </div>

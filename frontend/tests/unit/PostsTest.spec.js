@@ -106,32 +106,30 @@ describe('Posts', () => {
     });
 
     it('renders correct amount of images', function () {
-        const wrapperImages = wrapper.findAll('.image')
-        const testDataImages = testData.filter(post => post.media === 'image')
+        const wrapperImages = wrapper.findAll('.image-content')
+        const testDataImages = testData.filter(post => post.media && post.media.type === 'image')
         expect(wrapperImages.length).toBe(testDataImages.length)
     });
 
     it('renders correct amount of videos', function () {
-        const wrapperVideos = wrapper.findAll('.video')
-        const testDataVideos = testData.filter(post => post.media === 'video')
+        const wrapperVideos = wrapper.findAll('.video-content')
+        const testDataVideos = testData.filter(post => post.media && post.media.type === 'video')
         expect(wrapperVideos.length).toBe(testDataVideos.length)
     });
 
     it('renders correct amount of null media contents', function () {
         const wrapperPosts = wrapper.findAll('.post')
-        const wrapperVideos = wrapper.findAll('.video')
-        const wrapperImages = wrapper.findAll('.image')
+        const wrapperVideos = wrapper.findAll('.video-content')
+        const wrapperImages = wrapper.findAll('.image-content')
         const wrapperNullMediaCount = wrapperPosts.length - wrapperImages.length - wrapperVideos.length
-        const testDataNullMedia = testData.filter(post => post.media !== 'image' && post.media !== 'video')
+        const testDataNullMedia = testData.filter(post => !post.media)
         expect(wrapperNullMediaCount).toBe(testDataNullMedia.length)
     });
 
-    /*
+
     it('renders dates with correct format', function () {
         const wrapperPosts = wrapper.findAll('.post')
-        console.log("SISINSIISNISNINSISINISNISNINSISNI " + wrapperPosts.at(1).attributes())
-        expect(wrapperPosts.contains('.post')).toBe(true)
-    });
-
-     */
+        const timeFormat = wrapperPosts.at(1).find(".time-content").text()
+        expect(timeFormat).toBe("Saturday, December 5, 2020 1:53 PM")
+    })
 });
