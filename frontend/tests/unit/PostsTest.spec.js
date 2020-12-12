@@ -100,7 +100,38 @@ describe('Posts', () => {
 
     const wrapper = mount(Posts, {router, store, localVue});
 
-    it('1 == 1', function () {
-        expect(true).toBe(true)
+    it('renders correct amount of posts', function () {
+        const posts = wrapper.findAll('.post')
+        expect(posts.length).toBe(testData.length)
     });
+
+    it('renders correct amount of images', function () {
+        const wrapperImages = wrapper.findAll('.image')
+        const testDataImages = testData.filter(post => post.media === 'image')
+        expect(wrapperImages.length).toBe(testDataImages.length)
+    });
+
+    it('renders correct amount of videos', function () {
+        const wrapperVideos = wrapper.findAll('.video')
+        const testDataVideos = testData.filter(post => post.media === 'video')
+        expect(wrapperVideos.length).toBe(testDataVideos.length)
+    });
+
+    it('renders correct amount of null media contents', function () {
+        const wrapperPosts = wrapper.findAll('.post')
+        const wrapperVideos = wrapper.findAll('.video')
+        const wrapperImages = wrapper.findAll('.image')
+        const wrapperNullMediaCount = wrapperPosts.length - wrapperImages.length - wrapperVideos.length
+        const testDataNullMedia = testData.filter(post => post.media !== 'image' && post.media !== 'video')
+        expect(wrapperNullMediaCount).toBe(testDataNullMedia.length)
+    });
+
+    /*
+    it('renders dates with correct format', function () {
+        const wrapperPosts = wrapper.findAll('.post')
+        console.log("SISINSIISNISNINSISINISNISNINSISNI " + wrapperPosts.at(1).attributes())
+        expect(wrapperPosts.contains('.post')).toBe(true)
+    });
+
+     */
 });
